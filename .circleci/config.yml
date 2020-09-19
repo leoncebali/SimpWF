@@ -16,6 +16,15 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - run: echo world
+  print_env_var:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - checkout
+      - run: 
+          name: "echo an env var that is part of our project"
+          command: |
+            echo $MY_ENV_VAR # this env var must be swt within the project
 workflows:
   # Name the workflow "welcome"
   welcome:
@@ -25,3 +34,4 @@ workflows:
       - print_world:
           requires:
             - print_hello
+      - print_env_var
