@@ -45,4 +45,3 @@ workflows:
   my_workflow:
     jobs:
       - my_command_job
-      - my_job_failed
