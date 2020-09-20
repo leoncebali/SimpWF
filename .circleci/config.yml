@@ -7,6 +7,15 @@ commands:
     
 jobs:
 
+  my_job_failed:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+        name: Job failed
+        command: return 1
+        when: on_fail
+        
   my_command_job:
     docker:
       - image: circleci/node:13.8.0
@@ -35,7 +44,4 @@ workflows:
   my_workflow:
     jobs:
       - my_command_job
-      - save_hello_world_output
-      - print_output_file:
-          requires:
-            - save_hello_world_output
+      - my_job_failed
