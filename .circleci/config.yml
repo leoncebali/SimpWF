@@ -1,6 +1,18 @@
 version: 2.1
 
+commands:
+  print_pipeline_id:
+    steps:
+      - run: echo ${CIRCLE_WORKFLOW_ID}
+    
 jobs:
+
+  my_command_job:
+    docker:
+      image: circleci/node:13.8.0
+    steps:
+      - print_pipeline_id
+      
   save_hello_world_output:
     docker:
       - image: circleci/node:13.8.0
@@ -22,6 +34,7 @@ jobs:
 workflows:
   my_workflow:
     jobs:
+      - my_command_job
       - save_hello_world_output
       - print_output_file:
           requires:
