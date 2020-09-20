@@ -6,16 +6,16 @@ commands:
       - run: echo ${CIRCLE_WORKFLOW_ID}
     
 jobs:
-
+  
   my_job_failed:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - run: return 1
       - run:
-        name: Job failed
-        command: echo "Hello Job failed!"
-        when: on_fail
+          name: Job failed
+          command: echo "Hello Job failed!"
+          when: on_fail
         
   my_command_job:
     docker:
@@ -45,3 +45,4 @@ workflows:
   my_workflow:
     jobs:
       - my_command_job
+      - my_job_failed
